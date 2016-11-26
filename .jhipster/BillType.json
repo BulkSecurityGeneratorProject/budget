@@ -1,0 +1,28 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "billTransaction",
+            "otherEntityName": "billTransaction",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mainType",
+            "fieldType": "BillMainType",
+            "fieldValues": "CREDIT_CARD,STUDENT_LOAN,OTHER_LOAN,HOUSE_LOAN,UTILITIES,MISC"
+        }
+    ],
+    "changelogDate": "20161120203920",
+    "entityTableName": "bill_type",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "no",
+    "angularJSSuffix": "mySuffix"
+}

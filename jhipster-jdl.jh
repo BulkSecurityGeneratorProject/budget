@@ -1,0 +1,100 @@
+
+
+
+entity AmexTransaction {
+	date LocalDate required,
+    description String required,
+    person String,
+    amount BigDecimal required,
+    referenceId Long,
+    budgeted Boolean
+}
+
+entity AllyTransaction {
+	date ZonedDateTime required,
+    amount BigDecimal required,
+    transactionType AllyTransactionType required,
+    description String required,
+    accountType AllyAccountType required,
+    budgeted Boolean
+}
+
+entity SinkingFundTransaction {
+	date LocalDate required,
+    type SinkingFundType required,
+    amount BigDecimal required
+}
+
+entity SpendingTransaction {
+	date LocalDate required,
+    amount BigDecimal required
+    
+}
+
+entity BillTransaction {
+	date LocalDate required,
+    amount BigDecimal,
+    dayOut Integer,
+    fromAccount String,
+    automatic Boolean
+}
+
+entity BillType {
+	name String,
+    mainType BillMainType
+}
+
+enum BillMainType {
+	CREDIT_CARD, STUDENT_LOAN, 
+    OTHER_LOAN, HOUSE_LOAN, 
+    UTILITIES, MISC
+}
+
+entity SpendingType {
+	name String,
+    mainType SpendingMainType
+}
+
+enum SpendingMainType {
+	GROCERIES, SHOPPING, RESTAURANTS,
+    FUEL, RECREATION
+}
+
+enum SinkingFundType {
+	HOUSE, CAR, HOA, POOL, 
+    KIDS_ACTIVITIES, ERIN_BLOW,
+    KEVIN_BLOW, AMAZON_PRIME,
+    VACATION, PETS, CHRISTMAS
+}
+
+enum AllyTransactionType {
+	DEPOSIT, WITHDRAWAL
+}
+
+enum AllyAccountType{
+	CHECKING, SAVINGS
+}
+
+relationship OneToMany {
+	SpendingTransaction{type} to SpendingType,
+    BillTransaction{type} to BillType
+}
+relationship ManyToOne {
+	SinkingFundTransaction{allyTransaction} to AllyTransaction,
+    SinkingFundTransaction{amexTranaction} to AmexTransaction,
+    SpendingTransaction{allyTransaction} to AllyTransaction,
+    SpendingTransaction{amexTransaction} to AmexTransaction,
+    BillTransaction{allyTransaction} to AllyTransaction,
+    BillTransaction{amexTransaction} to AmexTransaction
+}
+
+
+// Set pagination options
+paginate AllyTransaction, AmexTransaction with infinite-scroll
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except BillType, SpendingType
+// Set an angular suffix
+angularSuffix * with mySuffix

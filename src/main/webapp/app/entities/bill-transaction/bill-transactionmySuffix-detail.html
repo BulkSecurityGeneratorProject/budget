@@ -1,0 +1,47 @@
+
+<div>
+    <h2><span>Bill Transaction</span> {{vm.billTransaction.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Date</span></dt>
+        <dd>
+            <span>{{vm.billTransaction.date | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Amount</span></dt>
+        <dd>
+            <span>{{vm.billTransaction.amount}}</span>
+        </dd>
+        <dt><span>Day Out</span></dt>
+        <dd>
+            <span>{{vm.billTransaction.dayOut}}</span>
+        </dd>
+        <dt><span>From Account</span></dt>
+        <dd>
+            <span>{{vm.billTransaction.fromAccount}}</span>
+        </dd>
+        <dt><span>Automatic</span></dt>
+        <dd>
+            <span>{{vm.billTransaction.automatic}}</span>
+        </dd>
+        <dt><span>Ally Transaction</span></dt>
+        <dd>
+            <a ui-sref="ally-transactionmySuffix-detail({id:vm.billTransaction.allyTransactionId})">{{vm.billTransaction.allyTransactionId}}</a>
+        </dd>
+        <dt><span>Amex Transaction</span></dt>
+        <dd>
+            <a ui-sref="amex-transactionmySuffix-detail({id:vm.billTransaction.amexTransactionId})">{{vm.billTransaction.amexTransactionId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="bill-transactionmySuffix-detail.edit({id:vm.billTransaction.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>

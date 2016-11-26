@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         name="CM1"
+         updateCheck="false"
+         maxBytesLocalHeap="16M">
+
+    <!--
+      This is a default configuration, it is re-configured by the CacheConfiguration Spring Bean, using the
+      properties from the resources/config/*.yml files.
+    -->
+
+    <diskStore path="java.io.tmpdir"/>
+
+    <defaultCache
+            eternal="false"
+            overflowToDisk="false"
+            />
+
+    <cache name="com.budget.domain.User"
+           timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.budget.domain.Authority"
+           timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.budget.domain.User.authorities"
+           timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.budget.domain.PersistentToken"
+           timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.budget.domain.User.persistentTokens"
+           timeToLiveSeconds="3600">
+    </cache>
+    
+    <cache name="com.budget.domain.AmexTransaction"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.budget.domain.AllyTransaction"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.budget.domain.SinkingFundTransaction"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.budget.domain.SpendingTransaction"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.budget.domain.SpendingTransaction.types"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.budget.domain.BillTransaction"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.budget.domain.BillTransaction.types"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.budget.domain.BillType"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.budget.domain.SpendingType"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.budget.domain.UploadedFiles"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <!-- jhipster-needle-ehcache-add-entry -->
+</ehcache>

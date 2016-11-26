@@ -1,0 +1,92 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="mySinkingFundTransactionLabel">Create or edit a Sinking Fund Transaction</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.sinkingFundTransaction.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.sinkingFundTransaction.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_date">Date</label>
+                <div class="input-group">
+                    <input id="field_date" type="text" class="form-control" name="date" uib-datepicker-popup="{{dateformat}}" ng-model="vm.sinkingFundTransaction.date" is-open="vm.datePickerOpenStatus.date"
+                    required/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('date')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            <div ng-show="editForm.date.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.date.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_type">Type</label>
+            <select class="form-control" name="type" ng-model="vm.sinkingFundTransaction.type" id="field_type" required>
+                <option value="HOUSE">HOUSE</option>
+                <option value="CAR">CAR</option>
+                <option value="HOA">HOA</option>
+                <option value="POOL">POOL</option>
+                <option value="KIDS_ACTIVITIES" data-translate="budgetApp.SinkingFundType.KIDS_ACTIVITIES">KIDS_ACTIVITIES</option>
+                <option value="ERIN_BLOW" data-translate="budgetApp.SinkingFundType.ERIN_BLOW">ERIN_BLOW</option>
+                <option value="KEVIN_BLOW" data-translate="budgetApp.SinkingFundType.KEVIN_BLOW">KEVIN_BLOW</option>
+                <option value="AMAZON_PRIME" data-translate="budgetApp.SinkingFundType.AMAZON_PRIME">AMAZON_PRIME</option>
+                <option value="VACATION">VACATION</option>
+                <option value="PETS">PETS</option>
+                <option value="CHRISTMAS">CHRISTMAS</option>
+            </select>
+            <div ng-show="editForm.type.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.type.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_amount">Amount</label>
+            <input type="number" class="form-control" name="amount" id="field_amount"
+                    ng-model="vm.sinkingFundTransaction.amount"
+                    required />
+            <div ng-show="editForm.amount.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.amount.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.amount.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="field_allyTransaction">Ally Transaction</label>
+            <select class="form-control" id="field_allyTransaction" name="allyTransaction" ng-model="vm.sinkingFundTransaction.allyTransactionId" ng-options="allyTransaction.id as allyTransaction.id for allyTransaction in vm.allytransactions"            >
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_amexTranaction">Amex Tranaction</label>
+            <select class="form-control" id="field_amexTranaction" name="amexTranaction" ng-model="vm.sinkingFundTransaction.amexTranactionId" ng-options="amexTransaction.id as amexTransaction.id for amexTransaction in vm.amextransactions"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

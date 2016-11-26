@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity SinkingFundTransaction.
+    -->
+    <changeSet id="20161120203917-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="ally_transaction_id"
+                                 baseTableName="sinking_fund_transaction"
+                                 constraintName="fk_sinking_fund_transaction_ally_transaction_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ally_transaction"/>
+
+        <addForeignKeyConstraint baseColumnNames="amex_tranaction_id"
+                                 baseTableName="sinking_fund_transaction"
+                                 constraintName="fk_sinking_fund_transaction_amex_tranaction_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="amex_transaction"/>
+
+    </changeSet>
+</databaseChangeLog>

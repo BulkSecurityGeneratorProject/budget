@@ -1,0 +1,27 @@
+<h2>File Upload Demo</h2>
+ 
+    <div class="well">
+        <div >
+			<form name="uploadTransaction" role="form" novalidate ng-submit="vm.save()">	
+				
+				<div class="form-group">
+		            <label class="control-label" for="field_status">Choose Bank</label>
+		            <select class="form-control" name="bank" ng-model="vm.bank" id="field_bank">
+		                <option value="ALLY">Ally</option>
+		                <option value="AMEX">Amex</option>
+		                <option value="WELLS_FARGO">Wells Fargo</option>
+		            </select>
+		        </div>
+                <div class="form-group">
+                    <label for="field_file">Select a file: </label>
+                    <input type="file" ng-model="vm.file"  class="form-control" id ="field_file"/>
+                </div>
+                <div>
+			        <button type="submit" ng-disabled="uploadTransaction.$invalid || vm.isSaving" class="btn btn-primary">
+			            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+			        </button>
+			    </div>
+            </form>
+        </div>
+    </div>
+    <div>{{vm.serverResponse}}</div>

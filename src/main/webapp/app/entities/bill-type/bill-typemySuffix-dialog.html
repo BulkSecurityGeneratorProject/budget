@@ -1,0 +1,49 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myBillTypeLabel">Create or edit a Bill Type</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.billType.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.billType.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.billType.name"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_mainType">Main Type</label>
+            <select class="form-control" name="mainType" ng-model="vm.billType.mainType" id="field_mainType">
+                <option value="CREDIT_CARD" data-translate="budgetApp.BillMainType.CREDIT_CARD">CREDIT_CARD</option>
+                <option value="STUDENT_LOAN" data-translate="budgetApp.BillMainType.STUDENT_LOAN">STUDENT_LOAN</option>
+                <option value="OTHER_LOAN" data-translate="budgetApp.BillMainType.OTHER_LOAN">OTHER_LOAN</option>
+                <option value="HOUSE_LOAN" data-translate="budgetApp.BillMainType.HOUSE_LOAN">HOUSE_LOAN</option>
+                <option value="UTILITIES">UTILITIES</option>
+                <option value="MISC">MISC</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="field_billTransaction">Bill Transaction</label>
+            <select class="form-control" id="field_billTransaction" name="billTransaction" ng-model="vm.billType.billTransactionId" ng-options="billTransaction.id as billTransaction.id for billTransaction in vm.billtransactions"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

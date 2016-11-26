@@ -1,0 +1,54 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "type",
+            "otherEntityName": "billType",
+            "otherEntityRelationshipName": "billTransaction"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "allyTransaction",
+            "otherEntityName": "allyTransaction",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "amexTransaction",
+            "otherEntityName": "amexTransaction",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "amount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "dayOut",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "fromAccount",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "automatic",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20161120203919",
+    "entityTableName": "bill_transaction",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "angularJSSuffix": "mySuffix"
+}

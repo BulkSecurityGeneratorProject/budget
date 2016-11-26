@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span>Spending Transaction</span> {{vm.spendingTransaction.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Date</span></dt>
+        <dd>
+            <span>{{vm.spendingTransaction.date | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Amount</span></dt>
+        <dd>
+            <span>{{vm.spendingTransaction.amount}}</span>
+        </dd>
+        <dt><span>Ally Transaction</span></dt>
+        <dd>
+            <a ui-sref="ally-transactionmySuffix-detail({id:vm.spendingTransaction.allyTransactionId})">{{vm.spendingTransaction.allyTransactionId}}</a>
+        </dd>
+        <dt><span>Amex Transaction</span></dt>
+        <dd>
+            <a ui-sref="amex-transactionmySuffix-detail({id:vm.spendingTransaction.amexTransactionId})">{{vm.spendingTransaction.amexTransactionId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="spending-transactionmySuffix-detail.edit({id:vm.spendingTransaction.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>

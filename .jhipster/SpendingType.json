@@ -1,0 +1,28 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "spendingTransaction",
+            "otherEntityName": "spendingTransaction",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mainType",
+            "fieldType": "SpendingMainType",
+            "fieldValues": "GROCERIES,SHOPPING,RESTAURANTS,FUEL,RECREATION"
+        }
+    ],
+    "changelogDate": "20161120203921",
+    "entityTableName": "spending_type",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "no",
+    "angularJSSuffix": "mySuffix"
+}
