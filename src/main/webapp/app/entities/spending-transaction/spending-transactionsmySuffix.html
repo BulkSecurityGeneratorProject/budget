@@ -40,6 +40,7 @@
                     <th><span>Amount</span></th>
                     <th><span>Ally Transaction</span></th>
                     <th><span>Amex Transaction</span></th>
+                    <th><span>Wells Fargo Transaction</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -53,6 +54,9 @@
                     </td>
                     <td>
                         <a ui-sref="amex-transactionmySuffix-detail({id:spendingTransaction.amexTransactionId})">{{spendingTransaction.amexTransactionId}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="wells-fargo-transactionmySuffix-detail({id:spendingTransaction.wellsFargoTransactionId})">{{spendingTransaction.wellsFargoTransactionId}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

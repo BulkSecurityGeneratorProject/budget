@@ -4,6 +4,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.budget.domain.common.Transactional;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -18,7 +20,7 @@ import java.util.Objects;
 @Table(name = "amex_transaction")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "amextransaction")
-public class AmexTransaction implements Serializable {
+public class AmexTransaction implements Transactional, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -57,6 +59,10 @@ public class AmexTransaction implements Serializable {
 
     public LocalDate getDate() {
         return date;
+    }
+    
+    public LocalDate getLocalDate() {
+    	return date;
     }
 
     public AmexTransaction date(LocalDate date) {

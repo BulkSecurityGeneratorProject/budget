@@ -9,7 +9,8 @@ import java.util.List;
 /**
  * Spring Data JPA repository for the AmexTransaction entity.
  */
-@SuppressWarnings("unused")
 public interface AmexTransactionRepository extends JpaRepository<AmexTransaction,Long> {
+	
+	public List<AmexTransaction> findByBudgeted(boolean budgeted);
 
 }

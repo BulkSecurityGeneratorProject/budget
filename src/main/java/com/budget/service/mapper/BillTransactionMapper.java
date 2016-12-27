@@ -14,6 +14,7 @@ public interface BillTransactionMapper {
 
     @Mapping(source = "allyTransaction.id", target = "allyTransactionId")
     @Mapping(source = "amexTransaction.id", target = "amexTransactionId")
+    @Mapping(source = "wellsFargoTransaction.id", target = "wellsFargoTransactionId")
     BillTransactionDTO billTransactionToBillTransactionDTO(BillTransaction billTransaction);
 
     List<BillTransactionDTO> billTransactionsToBillTransactionDTOs(List<BillTransaction> billTransactions);
@@ -21,6 +22,7 @@ public interface BillTransactionMapper {
     @Mapping(target = "types", ignore = true)
     @Mapping(source = "allyTransactionId", target = "allyTransaction")
     @Mapping(source = "amexTransactionId", target = "amexTransaction")
+    @Mapping(source = "wellsFargoTransactionId", target = "wellsFargoTransaction")
     BillTransaction billTransactionDTOToBillTransaction(BillTransactionDTO billTransactionDTO);
 
     List<BillTransaction> billTransactionDTOsToBillTransactions(List<BillTransactionDTO> billTransactionDTOs);
@@ -41,5 +43,14 @@ public interface BillTransactionMapper {
         AmexTransaction amexTransaction = new AmexTransaction();
         amexTransaction.setId(id);
         return amexTransaction;
+    }
+
+    default WellsFargoTransaction wellsFargoTransactionFromId(Long id) {
+        if (id == null) {
+            return null;
+        }
+        WellsFargoTransaction wellsFargoTransaction = new WellsFargoTransaction();
+        wellsFargoTransaction.setId(id);
+        return wellsFargoTransaction;
     }
 }

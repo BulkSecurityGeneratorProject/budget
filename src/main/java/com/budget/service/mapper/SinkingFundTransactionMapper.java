@@ -14,12 +14,14 @@ public interface SinkingFundTransactionMapper {
 
     @Mapping(source = "allyTransaction.id", target = "allyTransactionId")
     @Mapping(source = "amexTranaction.id", target = "amexTranactionId")
+    @Mapping(source = "wellsFargoTransaction.id", target = "wellsFargoTransactionId")
     SinkingFundTransactionDTO sinkingFundTransactionToSinkingFundTransactionDTO(SinkingFundTransaction sinkingFundTransaction);
 
     List<SinkingFundTransactionDTO> sinkingFundTransactionsToSinkingFundTransactionDTOs(List<SinkingFundTransaction> sinkingFundTransactions);
 
     @Mapping(source = "allyTransactionId", target = "allyTransaction")
     @Mapping(source = "amexTranactionId", target = "amexTranaction")
+    @Mapping(source = "wellsFargoTransactionId", target = "wellsFargoTransaction")
     SinkingFundTransaction sinkingFundTransactionDTOToSinkingFundTransaction(SinkingFundTransactionDTO sinkingFundTransactionDTO);
 
     List<SinkingFundTransaction> sinkingFundTransactionDTOsToSinkingFundTransactions(List<SinkingFundTransactionDTO> sinkingFundTransactionDTOs);
@@ -40,5 +42,14 @@ public interface SinkingFundTransactionMapper {
         AmexTransaction amexTransaction = new AmexTransaction();
         amexTransaction.setId(id);
         return amexTransaction;
+    }
+
+    default WellsFargoTransaction wellsFargoTransactionFromId(Long id) {
+        if (id == null) {
+            return null;
+        }
+        WellsFargoTransaction wellsFargoTransaction = new WellsFargoTransaction();
+        wellsFargoTransaction.setId(id);
+        return wellsFargoTransaction;
     }
 }

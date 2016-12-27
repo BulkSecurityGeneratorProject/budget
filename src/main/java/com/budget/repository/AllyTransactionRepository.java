@@ -3,6 +3,7 @@ package com.budget.repository;
 import com.budget.domain.AllyTransaction;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.QueryByExampleExecutor;
 
 import java.util.List;
 
@@ -11,5 +12,7 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface AllyTransactionRepository extends JpaRepository<AllyTransaction,Long> {
-
+	
+	public List<AllyTransaction> findByBudgeted(boolean budgeted);
+	
 }

@@ -8,11 +8,12 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
 import com.budget.domain.enumeration.AllyTransactionType;
-
+import com.budget.domain.common.Transactional;
 import com.budget.domain.enumeration.AccountType;
 
 /**
@@ -22,7 +23,7 @@ import com.budget.domain.enumeration.AccountType;
 @Table(name = "ally_transaction")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "allytransaction")
-public class AllyTransaction implements Serializable {
+public class AllyTransaction implements Transactional, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -65,6 +66,10 @@ public class AllyTransaction implements Serializable {
 
     public ZonedDateTime getDate() {
         return date;
+    }
+    
+    public LocalDate getLocalDate() {
+    	return LocalDate.of(date.getYear(), date.getMonth(), date.getDayOfMonth());
     }
 
     public AllyTransaction date(ZonedDateTime date) {

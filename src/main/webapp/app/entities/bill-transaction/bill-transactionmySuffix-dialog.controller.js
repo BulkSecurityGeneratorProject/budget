@@ -5,9 +5,9 @@
         .module('budgetApp')
         .controller('BillTransactionMySuffixDialogController', BillTransactionMySuffixDialogController);
 
-    BillTransactionMySuffixDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'BillTransaction', 'BillType', 'AllyTransaction', 'AmexTransaction'];
+    BillTransactionMySuffixDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'BillTransaction', 'BillType', 'AllyTransaction', 'AmexTransaction', 'WellsFargoTransaction'];
 
-    function BillTransactionMySuffixDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, BillTransaction, BillType, AllyTransaction, AmexTransaction) {
+    function BillTransactionMySuffixDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, BillTransaction, BillType, AllyTransaction, AmexTransaction, WellsFargoTransaction) {
         var vm = this;
 
         vm.billTransaction = entity;
@@ -18,6 +18,7 @@
         vm.billtypes = BillType.query();
         vm.allytransactions = AllyTransaction.query();
         vm.amextransactions = AmexTransaction.query();
+        vm.wellsfargotransactions = WellsFargoTransaction.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

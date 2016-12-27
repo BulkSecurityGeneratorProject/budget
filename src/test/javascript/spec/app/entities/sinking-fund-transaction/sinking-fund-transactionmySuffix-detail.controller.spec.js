@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('SinkingFundTransaction Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockSinkingFundTransaction, MockAllyTransaction, MockAmexTransaction;
+        var MockEntity, MockPreviousState, MockSinkingFundTransaction, MockAllyTransaction, MockAmexTransaction, MockWellsFargoTransaction;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -15,6 +15,7 @@ describe('Controller Tests', function() {
             MockSinkingFundTransaction = jasmine.createSpy('MockSinkingFundTransaction');
             MockAllyTransaction = jasmine.createSpy('MockAllyTransaction');
             MockAmexTransaction = jasmine.createSpy('MockAmexTransaction');
+            MockWellsFargoTransaction = jasmine.createSpy('MockWellsFargoTransaction');
             
 
             var locals = {
@@ -24,7 +25,8 @@ describe('Controller Tests', function() {
                 'previousState': MockPreviousState,
                 'SinkingFundTransaction': MockSinkingFundTransaction,
                 'AllyTransaction': MockAllyTransaction,
-                'AmexTransaction': MockAmexTransaction
+                'AmexTransaction': MockAmexTransaction,
+                'WellsFargoTransaction': MockWellsFargoTransaction
             };
             createController = function() {
                 $injector.get('$controller')("SinkingFundTransactionMySuffixDetailController", locals);

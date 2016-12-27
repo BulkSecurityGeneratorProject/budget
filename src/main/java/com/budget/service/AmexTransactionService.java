@@ -1,16 +1,15 @@
 package com.budget.service;
 
+import com.budget.service.common.BaseTransactionService;
 import com.budget.service.dto.AmexTransactionDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Service Interface for managing AmexTransaction.
  */
-public interface AmexTransactionService {
+public interface AmexTransactionService extends BaseTransactionService{
 
     /**
      * Save a amexTransaction.

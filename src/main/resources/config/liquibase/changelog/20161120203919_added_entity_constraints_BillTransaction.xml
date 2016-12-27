@@ -20,5 +20,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="amex_transaction"/>
 
+        <addForeignKeyConstraint baseColumnNames="wells_fargo_transaction_id"
+                                 baseTableName="bill_transaction"
+                                 constraintName="fk_bill_transaction_wells_fargo_transaction_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="wells_fargo_transaction"/>
+
     </changeSet>
 </databaseChangeLog>

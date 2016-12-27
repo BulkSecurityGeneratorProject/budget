@@ -47,6 +47,9 @@ public class SinkingFundTransaction implements Serializable {
     @ManyToOne
     private AmexTransaction amexTranaction;
 
+    @ManyToOne
+    private WellsFargoTransaction wellsFargoTransaction;
+
     public Long getId() {
         return id;
     }
@@ -118,6 +121,19 @@ public class SinkingFundTransaction implements Serializable {
 
     public void setAmexTranaction(AmexTransaction amexTransaction) {
         this.amexTranaction = amexTransaction;
+    }
+
+    public WellsFargoTransaction getWellsFargoTransaction() {
+        return wellsFargoTransaction;
+    }
+
+    public SinkingFundTransaction wellsFargoTransaction(WellsFargoTransaction wellsFargoTransaction) {
+        this.wellsFargoTransaction = wellsFargoTransaction;
+        return this;
+    }
+
+    public void setWellsFargoTransaction(WellsFargoTransaction wellsFargoTransaction) {
+        this.wellsFargoTransaction = wellsFargoTransaction;
     }
 
     @Override

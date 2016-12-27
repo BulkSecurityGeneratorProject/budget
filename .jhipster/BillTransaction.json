@@ -18,6 +18,12 @@
             "relationshipName": "amexTransaction",
             "otherEntityName": "amexTransaction",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "wellsFargoTransaction",
+            "otherEntityName": "wellsFargoTransaction",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "fields": [
@@ -46,9 +52,9 @@
         }
     ],
     "changelogDate": "20161120203919",
-    "entityTableName": "bill_transaction",
     "dto": "mapstruct",
-    "pagination": "no",
     "service": "serviceImpl",
+    "entityTableName": "bill_transaction",
+    "pagination": "no",
     "angularJSSuffix": "mySuffix"
 }

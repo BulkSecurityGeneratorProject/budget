@@ -31,6 +31,8 @@ public class SinkingFundTransactionDTO implements Serializable {
     
     private Long amexTranactionId;
     
+    private Long wellsFargoTransactionId;
+    
     public Long getId() {
         return id;
     }
@@ -74,6 +76,14 @@ public class SinkingFundTransactionDTO implements Serializable {
 
     public void setAmexTranactionId(Long amexTransactionId) {
         this.amexTranactionId = amexTransactionId;
+    }
+
+    public Long getWellsFargoTransactionId() {
+        return wellsFargoTransactionId;
+    }
+
+    public void setWellsFargoTransactionId(Long wellsFargoTransactionId) {
+        this.wellsFargoTransactionId = wellsFargoTransactionId;
     }
 
     @Override

@@ -1,17 +1,15 @@
 package com.budget.service;
 
-import com.budget.domain.UploadedFiles;
+import com.budget.service.common.BaseTransactionService;
 import com.budget.service.dto.AllyTransactionDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Service Interface for managing AllyTransaction.
  */
-public interface AllyTransactionService {
+public interface AllyTransactionService extends BaseTransactionService {
 
     /**
      * Save a allyTransaction.
@@ -54,5 +52,4 @@ public interface AllyTransactionService {
      */
     Page<AllyTransactionDTO> search(String query, Pageable pageable);
 
-	void parseCsvAndSave(UploadedFiles uploadedFile);
 }

@@ -1,53 +1,45 @@
 package com.budget.service.impl;
 
-import com.budget.service.AllyTransactionService;
-import com.budget.domain.AllyTransaction;
-import com.budget.domain.UploadedFiles;
-import com.budget.domain.enumeration.AllyAccountType;
-import com.budget.domain.enumeration.AllyTransactionType;
-import com.budget.repository.AllyTransactionRepository;
-import com.budget.repository.search.AllyTransactionSearchRepository;
-import com.budget.service.dto.AllyTransactionDTO;
-import com.budget.service.mapper.AllyTransactionMapper;
-
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVPrinter;
-import org.apache.commons.csv.CSVRecord;
-import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.stereotype.Service;
-
-import javax.inject.Inject;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import javax.inject.Inject;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.budget.domain.AllyTransaction;
+import com.budget.domain.UploadedFiles;
+import com.budget.domain.enumeration.AllyTransactionType;
+import com.budget.repository.AllyTransactionRepository;
+import com.budget.repository.search.AllyTransactionSearchRepository;
+import com.budget.service.AllyTransactionService;
+import com.budget.service.dto.AllyTransactionDTO;
+import com.budget.service.impl.common.AbstractBaseTransactionService;
+import com.budget.service.mapper.AllyTransactionMapper;
 
 /**
  * Service Implementation for managing AllyTransaction.
  */
 @Service
 @Transactional
-public class AllyTransactionServiceImpl implements AllyTransactionService{
+public class AllyTransactionServiceImpl extends AbstractBaseTransactionService<AllyTransaction, AllyTransactionRepository> implements AllyTransactionService{
 
     private static final int TYPE_INDEX = 3;
 
@@ -110,7 +102,9 @@ public class AllyTransactionServiceImpl implements AllyTransactionService{
 	    		    throw new RuntimeException("Error at line "
 	    		      + parser.getCurrentLineNumber(), e);
 	    		  }
-	    		  transactions.add(transaction);
+	    		  if (!transactionExist(transaction, allyTransactionRepository)) {
+	    			  transactions.add(transaction);
+	    		  }
     			} else {
     				firstRowComplete = true;
     			}

@@ -15,10 +15,6 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 
 import java.time.LocalDate;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -42,6 +38,12 @@ public class UploadedFilesService {
     
     @Inject
     private AllyTransactionService allyTransactionService;
+    
+    @Inject
+    private AmexTransactionService amexTransactionService;
+    
+    @Inject 
+    private WellsFargoTransactionService wellsFargoTransactionService;
 
     /**
      * Save a uploadedFiles.
@@ -68,10 +70,10 @@ public class UploadedFilesService {
     		allyTransactionService.parseCsvAndSave(uploadedFile);
     		break;
     	case AMEX:
-    		//TODO
+    		amexTransactionService.parseCsvAndSave(uploadedFile);
     		break;
     	case WELLS_FARGO:
-    		//TODO
+    		wellsFargoTransactionService.parseCsvAndSave(uploadedFile);
     		break;
     	default:
     		break;

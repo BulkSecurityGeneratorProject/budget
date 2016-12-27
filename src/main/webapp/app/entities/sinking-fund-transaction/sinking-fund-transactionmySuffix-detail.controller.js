@@ -5,9 +5,9 @@
         .module('budgetApp')
         .controller('SinkingFundTransactionMySuffixDetailController', SinkingFundTransactionMySuffixDetailController);
 
-    SinkingFundTransactionMySuffixDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'SinkingFundTransaction', 'AllyTransaction', 'AmexTransaction'];
+    SinkingFundTransactionMySuffixDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'SinkingFundTransaction', 'AllyTransaction', 'AmexTransaction', 'WellsFargoTransaction'];
 
-    function SinkingFundTransactionMySuffixDetailController($scope, $rootScope, $stateParams, previousState, entity, SinkingFundTransaction, AllyTransaction, AmexTransaction) {
+    function SinkingFundTransactionMySuffixDetailController($scope, $rootScope, $stateParams, previousState, entity, SinkingFundTransaction, AllyTransaction, AmexTransaction, WellsFargoTransaction) {
         var vm = this;
 
         vm.sinkingFundTransaction = entity;

@@ -1,0 +1,41 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "amount",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "budgeted",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "accountType",
+            "fieldType": "AccountType",
+            "fieldValues": "CHECKING, SAVINGS, CREDIT_CARD"
+        }
+    ],
+    "changelogDate": "20161204132913",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "wells_fargo_transaction",
+    "pagination": "pager"
+}

@@ -27,6 +27,8 @@ public class SpendingTransactionDTO implements Serializable {
     
     private Long amexTransactionId;
     
+    private Long wellsFargoTransactionId;
+    
     public Long getId() {
         return id;
     }
@@ -63,6 +65,14 @@ public class SpendingTransactionDTO implements Serializable {
 
     public void setAmexTransactionId(Long amexTransactionId) {
         this.amexTransactionId = amexTransactionId;
+    }
+
+    public Long getWellsFargoTransactionId() {
+        return wellsFargoTransactionId;
+    }
+
+    public void setWellsFargoTransactionId(Long wellsFargoTransactionId) {
+        this.wellsFargoTransactionId = wellsFargoTransactionId;
     }
 
     @Override

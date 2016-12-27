@@ -12,6 +12,12 @@
             "relationshipName": "amexTranaction",
             "otherEntityName": "amexTransaction",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "wellsFargoTransaction",
+            "otherEntityName": "wellsFargoTransaction",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "fields": [
@@ -39,9 +45,9 @@
         }
     ],
     "changelogDate": "20161120203917",
-    "entityTableName": "sinking_fund_transaction",
     "dto": "mapstruct",
-    "pagination": "no",
     "service": "serviceImpl",
+    "entityTableName": "sinking_fund_transaction",
+    "pagination": "no",
     "angularJSSuffix": "mySuffix"
 }

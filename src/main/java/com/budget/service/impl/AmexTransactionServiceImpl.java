@@ -1,23 +1,37 @@
 package com.budget.service.impl;
 
 import com.budget.service.AmexTransactionService;
+import com.budget.domain.AllyTransaction;
 import com.budget.domain.AmexTransaction;
+import com.budget.domain.UploadedFiles;
+import com.budget.domain.enumeration.AllyTransactionType;
 import com.budget.repository.AmexTransactionRepository;
 import com.budget.repository.search.AmexTransactionSearchRepository;
 import com.budget.service.dto.AmexTransactionDTO;
+import com.budget.service.impl.common.AbstractBaseTransactionService;
 import com.budget.service.mapper.AmexTransactionMapper;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.LinkedList;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -26,9 +40,19 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  */
 @Service
 @Transactional
-public class AmexTransactionServiceImpl implements AmexTransactionService{
+public class AmexTransactionServiceImpl extends AbstractBaseTransactionService<AmexTransaction, AmexTransactionRepository> implements AmexTransactionService{
 
-    private final Logger log = LoggerFactory.getLogger(AmexTransactionServiceImpl.class);
+    private static final int REFERENCE_ID = 14;
+
+	private static final int PERSON_INDEX = 3;
+
+	private static final int AMOUNT_INDEX = 7;
+
+	private static final int DESCRIPTION_INDEX = 2;
+
+	private static final int DATE_INDEX = 0;
+
+	private final Logger log = LoggerFactory.getLogger(AmexTransactionServiceImpl.class);
     
     @Inject
     private AmexTransactionRepository amexTransactionRepository;
@@ -53,6 +77,41 @@ public class AmexTransactionServiceImpl implements AmexTransactionService{
         amexTransactionSearchRepository.save(amexTransaction);
         return result;
     }
+    
+    @Override
+    public void parseCsvAndSave(UploadedFiles uploadedFile) {
+    	CSVParser parser;
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy  EEE");
+    	List<AmexTransaction> transactions = new ArrayList<>();
+		try {
+			parser = CSVFormat.EXCEL.parse(
+				    new InputStreamReader(new ByteArrayInputStream(uploadedFile.getFile()), "UTF8"));
+	
+    		for (CSVRecord record : parser) {
+    				AmexTransaction transaction = new AmexTransaction();
+	    		  try {
+	    			  transaction.setDate(localDateFromString(record.get(DATE_INDEX), formatter));
+	    			  transaction.setDescription(record.get(DESCRIPTION_INDEX));
+	    			  transaction.setAmount(formatAmount(record.get(AMOUNT_INDEX)));
+	    			  transaction.setPerson(record.get(PERSON_INDEX));
+	    			  transaction.setReferenceId(Long.parseLong(record.get(REFERENCE_ID).replace("'", "")));
+	    		
+	    		  } catch (Exception e) {
+	    		    throw new RuntimeException("Error at line "
+	    		      + parser.getCurrentLineNumber(), e);
+	    		  }
+	    		  if (!transactionExist(transaction, amexTransactionRepository)) {
+	    			  transactions.add(transaction);
+	    		  }
+    		}
+    		parser.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		amexTransactionRepository.save(transactions);
+    }
+
 
     /**
      *  Get all the amexTransactions.
